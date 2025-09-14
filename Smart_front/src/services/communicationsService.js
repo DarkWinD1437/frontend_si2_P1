@@ -177,7 +177,7 @@ export const getAvisos = async (filtros = {}) => {
 // Obtener aviso por ID
 export const getAviso = async (id) => {
     try {
-        const response = await fetch(`${API_BASE_URL}/avisos/${id}/`, {
+        const response = await fetch(`${API_BASE_URL}/aviso/${id}/`, {
             method: 'GET',
             headers: getAuthHeaders(),
         });
