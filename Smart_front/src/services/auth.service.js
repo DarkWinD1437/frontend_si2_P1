@@ -27,8 +27,9 @@ const login = async (username, password) => {
                 username: username,
             };
             
-            localStorage.setItem('user', JSON.stringify(userData));
+            // Configurar el token en los headers ANTES de hacer la petición al perfil
             api.defaults.headers.common['Authorization'] = `Token ${response.data.token}`;
+            localStorage.setItem('token', response.data.token);
             
             // OBTENER DATOS DEL USUARIO DEL ENDPOINT /api/me/
             try {
@@ -62,6 +63,7 @@ const login = async (username, password) => {
         });
         
         localStorage.removeItem('user');
+        localStorage.removeItem('token');
         delete api.defaults.headers.common['Authorization'];
         
         throw error;
@@ -70,6 +72,7 @@ const login = async (username, password) => {
 
 const logout = () => {
     localStorage.removeItem('user');
+    localStorage.removeItem('token');
     delete api.defaults.headers.common['Authorization'];
 };
 
